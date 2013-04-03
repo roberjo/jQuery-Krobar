@@ -1,4 +1,4 @@
-jquery.krobar.js
+jQuery.Krobar.js
 ================
 Ultimate jQuery Ajax Post plugin
 
