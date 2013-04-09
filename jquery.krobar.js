@@ -83,6 +83,7 @@
                     id: xname, 
                     myvalue: elem
                 },
+                dataType: 'json',
                 beforeSend: function ( xhr ) {
                     // this is where we append a loading image
                     var command = "$('#"+xname+"').after('<img src=\"images/ajax-loader.gif\" alt=\"Loading...\" class=\"loading\" />');";
@@ -91,15 +92,11 @@
             })).done(function ( data ) {
                 clearTimeout(loading);
                 $('.loading').remove();
-                var n = data.indexOf("SQL/DB Error");
-                if(n >= 0){
-                    $(data).find('font').each(function(index){
-                        if($(this).attr('color') == 'ff0000'){
-                            alert('SYSTEM ERROR: PLEASE ALERT TECH SUPPORT: '+$(this).text());
-                            $('#'+xname).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
-                        }
-                    });
-                }
+                $.each(data, function(key, val) {
+                    if(val.indexOf('Error') >= 0) {
+                        alert('ERROR: '+val);
+                    }
+                });
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 clearTimeout(loading);
                 $('.loading').remove();
