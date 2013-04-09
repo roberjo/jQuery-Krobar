@@ -61,7 +61,7 @@
             // call them like so: this.yourOtherFunction(this.element, this.options).
 
             // TODO: Get all elements, add .on() change function to fire ajax post using options passed in
-            $(this input).change(function () {
+            $(this 'input').change(function () {
                 this.saveData(this.element, this.options);
             });
 
