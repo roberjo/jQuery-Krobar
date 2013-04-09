@@ -62,8 +62,7 @@
 
             // TODO: Get all elements, add .on() change function to fire ajax post using options passed in
             $(this.element).find('input').change(
-                var changed_el = $(this);
-                $.proxy(function () {
+                $.proxy(function (dat) {
                  //use original 'this'
                  this.saveData(changed_el, this.options);
              },this));
