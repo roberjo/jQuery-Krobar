@@ -64,7 +64,7 @@
             $(this.element).find('input').change(
                 $.proxy(function (dat) {
                  //use original 'this'
-                 this.saveData(dat, this.options);
+                 this.saveData(dat.currentTarget, this.options);
              },this));
 
         }, 
