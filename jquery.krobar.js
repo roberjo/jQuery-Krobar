@@ -85,7 +85,7 @@
                 },
                 beforeSend: function ( xhr ) {
                     // this is where we append a loading image
-                    var command = "$('#"+xid+"').after('<img src=\"images/ajax-loader.gif\" alt=\"Loading...\" class=\"loading\" />');";
+                    var command = "$('#"+xname+"').after('<img src=\"images/ajax-loader.gif\" alt=\"Loading...\" class=\"loading\" />');";
                     loading = setTimeout(command, 300);
                 }
             })).done(function ( data ) {
@@ -96,14 +96,14 @@
                     $(data).find('font').each(function(index){
                         if($(this).attr('color') == 'ff0000'){
                             alert('SYSTEM ERROR: PLEASE ALERT TECH SUPPORT: '+$(this).text());
-                            $('#'+xid).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
+                            $('#'+xname).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
                         }
                     });
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 clearTimeout(loading);
                 $('.loading').remove();
-                $('#'+xid).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
+                $('#'+xname).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
             });
         }
     };
