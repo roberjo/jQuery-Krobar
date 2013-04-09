@@ -3,7 +3,7 @@
  * @author John B. Roberts
  * @version 0.1
  *
- *  $('#frm input').krobar({
+ *  $('#frm_id').krobar({
  *      resourceURI: '/path/to/action',
  *      callback: function(){}
  *  });
@@ -61,10 +61,48 @@
             // call them like so: this.yourOtherFunction(this.element, this.options).
 
             // TODO: Get all elements, add .on() change function to fire ajax post using options passed in
+            $(this input).change(function () {
+                this.saveData(this.element, this.options);
+            });
+
         }, 
         
-        yourOtherFunction: function(el, options) {
-            // some logic
+        saveData: function(el, options) {
+            // Fire Ajax POST
+            var xname = el.name;
+            var elem = el.value;
+
+            var loading;
+
+            var jqxhr = ($.ajax({
+                type: 'POST',
+                url: options.resourceURI,
+                data: {
+                    id: xname, 
+                    myvalue: elem
+                },
+                beforeSend: function ( xhr ) {
+                    // this is where we append a loading image
+                    var command = "$('#"+xid+"').after('<img src=\"images/ajax-loader.gif\" alt=\"Loading...\" class=\"loading\" />');";
+                    loading = setTimeout(command, 300);
+                }
+            })).done(function ( data ) {
+                clearTimeout(loading);
+                $('.loading').remove();
+                var n = data.indexOf("SQL/DB Error");
+                if(n >= 0){
+                    $(data).find('font').each(function(index){
+                        if($(this).attr('color') == 'ff0000'){
+                            alert('SYSTEM ERROR: PLEASE ALERT TECH SUPPORT: '+$(this).text());
+                            $('#'+xid).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
+                        }
+                    });
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                clearTimeout(loading);
+                $('.loading').remove();
+                $('#'+xid).after('<img src="images/icon_alert.gif" alt="Loading..." class="loading"/>');
+            });
         }
     };
 
