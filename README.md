@@ -8,7 +8,7 @@ HTML Form enhancement to encapsulate AJAX POST on input changes. ([See Demo](htt
 
 <pre>&lt;form id="form_id" >
   &lt;div class="row">
-    &lt;label for="input_name" > Name </label>
+    &lt;label for="input_name" > Name &lt;/label>
     &lt;input id="input_id" name="input_name" type="text">&lt;/input>
   &lt;/div>
 &lt;/form></pre>
